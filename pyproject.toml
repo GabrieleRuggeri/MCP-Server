@@ -1,7 +1,48 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "mcp-server"
+name = "fastmcp-template"
 version = "0.1.0"
-description = "Add your description here"
+description = "Template repository for building FastMCP clients and servers"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "fastmcp>=0.1.0",
+    "langchain-core>=0.2.0",
+    "langchain-ollama>=0.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2.0",
+    "pytest-asyncio>=0.23.0",
+    "mypy>=1.10.0",
+    "ruff>=0.4.0",
+]
+
+[project.urls]
+"Source" = "https://github.com/latent-space-inc/fastmcp"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+select = ["E", "F", "I", "UP", "D"]
+ignore = ["D203", "D213"]
+
+[tool.ruff.format]
+line-ending = "lf"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_configs = true
+warn_return_any = true
+packages = ["fastmcp_template"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
